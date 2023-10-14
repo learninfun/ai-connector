@@ -31,7 +31,7 @@ function PageApiKeys() {
             id="outlined-controlled"
             label="OpenAI"
             type="password"
-            value={openAiKey}
+            value={openAiKey}            
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setOpenAiKey(event.target.value);              
             }}

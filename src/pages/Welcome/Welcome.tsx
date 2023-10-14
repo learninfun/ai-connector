@@ -33,6 +33,7 @@ function Welcome() {
       <Meta title="Welcome" />
       <Container maxWidth="md">
         <CardAnswerList topicThreads={topicThreads}/>
+        <div style={{ height: '200px' }}></div>
       </Container>
       
       <MsgFooter/>

@@ -16,7 +16,7 @@ function CardAnswer({topicThread}: CardAnswerProps) {
         </CardContent>
         <CardContent>
           <Typography variant="h5" component="div">
-            Answer
+          {topicThread.aiModal} Answer
           </Typography>
           <CustomMarkdown>{topicThread.answer}</CustomMarkdown>
         </CardContent>

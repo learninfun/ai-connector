@@ -106,7 +106,7 @@ export default function MsgFooter(props: CardAnswerListProps) {
   };
 
   const handleKeyEnter = async (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== "Enter") {
+    if (event.key !== "Enter" || event.shiftKey || event.altKey || event.ctrlKey) {
       return;
     }
 
@@ -131,6 +131,9 @@ export default function MsgFooter(props: CardAnswerListProps) {
       askTime: Date.now()};
 
     topicThreadDao.addRecord(topicThread);
+    
+    var pageHeight = document.documentElement.scrollHeight;
+    window.scrollTo(0, pageHeight);
 
     setIsLoading(false);
   };
@@ -138,9 +141,9 @@ export default function MsgFooter(props: CardAnswerListProps) {
 
   return (
     <BottomBox component="footer" sx={{pb: 2}}>
-      <Container maxWidth="md" sx={{ backgroundColor: '#171717' }}>
+      <Container maxWidth="md" sx={{ backgroundColor: '#171717'}}>
         <Grid container spacing={1}>
-          <Grid item xs={2}>
+          <Grid item xs={5}>
             <Select
               labelId="selectAiProvicer" id="selectAiProvicer" fullWidth
               value={aiProvider}
@@ -149,20 +152,21 @@ export default function MsgFooter(props: CardAnswerListProps) {
               <MenuItem value="OPEN_AI">OpenAI</MenuItem>
             </Select>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={5}>
             <Select labelId="selectAiModal" id="selectAiModal" fullWidth
               value={aiModel}
               onChange={handleAiModelChange}          
             >
               <MenuItem value="gpt-3.5-turbo">ChatGpt3</MenuItem>
-              <MenuItem value="ChatGpt4">ChatGpt4</MenuItem>
+              <MenuItem value="gpt-4">ChatGpt4</MenuItem>
+              <MenuItem value="gpt-4-0613">ChatGpt4-0613</MenuItem>
             </Select>
           </Grid>
-          <Grid item xs={7}>
-            <TextField id="inputMsg" placeholder="Send a message..." fullWidth onKeyDown={handleKeyEnter}/>
-          </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             {isLoading && <CircularProgress color="inherit"/>}
+          </Grid>
+          <Grid item xs={12} sx={{ maxHeight: '150px', overflowY: 'auto'}}>
+            <TextField id="inputMsg" placeholder="Send a message..." fullWidth multiline onKeyDown={handleKeyEnter}/>
           </Grid>
         </Grid>
       </Container>
